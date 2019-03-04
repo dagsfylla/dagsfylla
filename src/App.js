@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Button, Collapsible, Heading, Grommet, Layer, ResponsiveContext } from 'grommet';
-import { FormClose, Notification } from 'grommet-icons';
+import { Box, Grommet, Heading } from 'grommet';
 
 const theme = {
     global: {
@@ -15,83 +14,36 @@ const theme = {
     },
 };
 
-const AppBar = props => (
-    <Box
-        tag="header"
-        direction="row"
-        align="center"
-        justify="between"
-        background="brand"
-        pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-        elevation="medium"
-        style={{ zIndex: '1' }}
-        {...props}
-    />
-);
-
 class App extends Component {
-    state = {
-        showSideBar: false,
-    };
-
     render() {
-        let { showSidebar } = this.state;
         return (
             <Grommet theme={theme} full>
-                <ResponsiveContext.Consumer>
-                    {size => (
-                        <Box>
-                            <AppBar>
-                                <Heading level="3" margin="none">
-                                    My App
-                                </Heading>
-                                <Button
-                                    icon={<Notification />}
-                                    onClick={() =>
-                                        this.setState(prevState => ({ showSidebar: !prevState.showSidebar }))
-                                    }
-                                />
-                            </AppBar>
-                            <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
-                                <Box flex align="center" justify="center">
-                                    app body
-                                </Box>
-                                {!showSidebar || size !== 'small' ? (
-                                    <Collapsible direction="horizontal" open={showSidebar}>
-                                        <Box
-                                            flex
-                                            width="medium"
-                                            background="light-2"
-                                            elevation="small"
-                                            align="center"
-                                            justify="center"
-                                        >
-                                            sidebar
-                                        </Box>
-                                    </Collapsible>
-                                ) : (
-                                    <Layer>
-                                        <Box
-                                            background="light-2"
-                                            tag="header"
-                                            justify="end"
-                                            align="center"
-                                            direction="row"
-                                        >
-                                            <Button
-                                                icon={<FormClose />}
-                                                onClick={() => this.setState({ showSidebar: false })}
-                                            />
-                                        </Box>
-                                        <Box fill background="light-2" align="center" justify="center">
-                                            sidebar
-                                        </Box>
-                                    </Layer>
-                                )}
-                            </Box>
-                        </Box>
-                    )}
-                </ResponsiveContext.Consumer>
+                <Box
+                    fill
+                    align="center"
+                    height="100vh"
+                    animation={{
+                        type: 'slideDown',
+                        delay: 0,
+                        duration: 1000,
+                        size: 'large',
+                    }}
+                >
+                    <Heading
+                        size="xlarge"
+                        color="#0645ad"
+                        margin={{
+                            vertical: 0,
+                            horizontal: 0,
+                            bottom: '-0.2em',
+                        }}
+                    >
+                        CHALLENGE
+                    </Heading>
+                    <Heading size="xlarge" margin="0">
+                        DAGSFYLLA
+                    </Heading>
+                </Box>
             </Grommet>
         );
     }
