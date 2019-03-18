@@ -25,10 +25,8 @@ class App extends Component {
             <Router>
                 <Grommet theme={theme} full>
                     <Box fill align="center" height="100vh">
-                        <Switch>
                             <Route exact path={'/'} component={LandingPage} />
                             <Route path={'/:username'} component={UserPage} />
-                        </Switch>
                     </Box>
 
                     <Box height="medium" background="neutral-2" fill="horizontal">
