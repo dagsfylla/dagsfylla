@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Box, Grommet, Heading} from 'grommet';
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import LandingPage from './containers/LandingPage';
 import UserPage from "./containers/UserPage";
+import TestForm from "./containers/TestPage";
 
 const theme = {
     global: {
@@ -27,6 +28,7 @@ class App extends Component {
                     <Box fill align="center" height="100vh">
                         <Switch>
                             <Route exact path={'/'} component={LandingPage} />
+                            <Route path={'/test-fauna'} component={TestForm} />
                             <Route path={'/:username'} component={UserPage} />
                         </Switch>
                     </Box>
