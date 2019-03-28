@@ -1,9 +1,10 @@
 import React from 'react';
-import {Box, Button, Heading, Paragraph, Collapsible, Text} from 'grommet';
+import { Box, Button, Heading, Paragraph, Menu } from 'grommet';
 import { Route, Switch, Link } from 'react-router-dom';
 import ListView from './ListView';
 import DetailView from './DetailView';
 import {Notification} from "grommet-icons";
+import DayDrunkForm from "../../components/DayDrunkForm/index";
 
 const AppBar = props => (
     <Box
@@ -20,11 +21,12 @@ const AppBar = props => (
 );
 
 class UserPage extends React.Component {
+
     state = {
         openNotification: false
     };
-    render() {
-        console.log(`${this.props.match.url}/:id`);
+
+    render() {    
 
         let { match } = this.props;
         const { openNotification } = this.state;
@@ -39,31 +41,32 @@ class UserPage extends React.Component {
                             Dagsfylla.no
                         </Heading>
                     </Link>
+                    <Menu
+                        label="Menu"
+                        items={[
+                            { label: 'See event', onClick: () => {
+                                this.props.history.push(``)
+                            } },
+                            { label: 'Create event', onClick: () => {
+                                /*<Redirect to='/create-event' />*/
+                                this.props.history.push(`${match.path}/create-event`)
+                            } },
+                        ]}
+                        />
                     <Button icon={<Notification />} onClick={() => {
                         this.setState({ openNotification: !openNotification })
                     }} />
                 </AppBar>
                 <Box flex direction="row">
                     <Box fill align="center">
-
                         <Heading textAlign="center">{match.params.username}</Heading>
-                        <Paragraph>Dette skal bli deres dagsfyllaplanlegger, {match.params.username}</Paragraph>
+                        <Paragraph>Velkommen til deres helt egne dagsfyllaplanlegger</Paragraph>
                     </Box>
-                    <Collapsible direction="horizontal" open={openNotification}>
-                        <Box
-                            flex
-                            width="medium"
-                            background="light-2"
-                            pad="small"
-                            elevation="small"
-                        >
-                            <Text size="xlarge">MYE dagsfylla her</Text>
-                        </Box>
-                    </Collapsible>
                 </Box>
                 <Switch>
                     <Route path={match.url} component={ListView} />
                     <Route path={`${match.url}/:id`} component={DetailView} />
+                    <Route path={`${match.url}/create-event`} component={DayDrunkForm} />
                 </Switch>
             </Box>
         );

@@ -5,6 +5,7 @@ import {
     Anchor,
     Button,
     Text,
+    Paragraph
 } from 'grommet';
 
 
@@ -35,6 +36,7 @@ class DetailView extends React.Component {
                     <Anchor href="" label="Link" />
                     <Button label="Button" onClick={() => {}} />
                 </Box>
+                <Paragraph>HEIHEIHEI</Paragraph>
             </Box>
         );
     }
