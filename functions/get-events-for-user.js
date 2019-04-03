@@ -1,4 +1,3 @@
-/* code from functions/todos-read-all.js */
 import faunadb from 'faunadb';
 
 const q = faunadb.query;
@@ -7,13 +6,17 @@ const client = new faunadb.Client({
 });
 
 exports.handler = (event, context, callback) => {
-    console.log('in function');
+    console.log('in function get events for user');
+    const data = JSON.parse(event.body);
+    console.log('data.userRef', data.userRef);
     return client
-        .query(q.Map(q.Paginate(q.Match(q.Ref('indexes/all_users'))), q.Lambda('ref', q.Get(q.Var('ref')))))
-        .then(ret => {
+        .query(
+            q.Map(q.Paginate(q.Match(q.Index('events_by_owner'), data.userRef)), q.Lambda('ref', q.Get(q.Var('ref'))))
+        )
+        .then(response => {
             return callback(null, {
                 statusCode: 200,
-                body: JSON.stringify(ret),
+                body: JSON.stringify(response),
             });
         })
         .catch(error => {

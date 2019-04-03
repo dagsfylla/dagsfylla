@@ -1,5 +1,5 @@
-/* code from functions/todos-read-all.js */
 import faunadb from 'faunadb';
+import getId from './utils/getId';
 
 const q = faunadb.query;
 const client = new faunadb.Client({
@@ -7,17 +7,18 @@ const client = new faunadb.Client({
 });
 
 exports.handler = (event, context, callback) => {
-    console.log('in function');
+    const data = JSON.parse(event.body);
+    const eventRef = getId(event.path);
+    console.log(`Function 'todo-update' invoked. update id: ${eventRef}`);
     return client
-        .query(q.Map(q.Paginate(q.Match(q.Ref('indexes/all_users'))), q.Lambda('ref', q.Get(q.Var('ref')))))
-        .then(ret => {
+        .query(q.Update(q.Ref(`classes/user_events/${eventRef}`), data))
+        .then(response => {
             return callback(null, {
                 statusCode: 200,
-                body: JSON.stringify(ret),
+                body: JSON.stringify(response),
             });
         })
         .catch(error => {
-            console.log('error', error);
             return callback(null, {
                 statusCode: 400,
                 body: JSON.stringify(error),

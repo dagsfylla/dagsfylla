@@ -1,23 +1,17 @@
-/* code from functions/todos-create.js */
-const faunadb = require('faunadb');
+import faunadb from 'faunadb';
+import getId from "./utils/getId";
 
-/* configure faunaDB Client with our secret */
 const q = faunadb.query;
 const client = new faunadb.Client({
     secret: process.env.FAUNADB_SECRET,
 });
 
-/* export our lambda function as named "handler" export */
 exports.handler = (event, context, callback) => {
-    /* parse the string body into a useable JS object */
-    const data = JSON.parse(event.body);
-    console.log('Function `create-user` invoked', data);
-    const userData = {
-        data: data,
-    };
+    const eventRef = getId(event.path);
+    console.log(`Function 'todo-update' invoked. update id: ${eventRef}`);
     /* construct the fauna query */
     return client
-        .query(q.Create(q.Ref('classes/users'), userData))
+        .query(q.Delete(q.Ref(q.Class('user_events'), eventRef)))
         .then(response => {
             console.log('success', response);
             /* Success! return the response with statusCode 200 */
