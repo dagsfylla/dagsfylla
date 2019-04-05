@@ -20,6 +20,19 @@ class DetailView extends React.Component {
 
     render() {
         let { detail } = this.state
+
+        let {
+            match: {
+                params
+            },
+            events,
+        } = this.props;
+
+        let event = events.find(({ id }) => id === parseInt(params.id));
+
+        if (!event) {
+            return <h3>No event found</h3>
+        }
         return (
             <Box>
                 <Box

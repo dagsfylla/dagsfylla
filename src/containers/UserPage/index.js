@@ -23,6 +23,7 @@ const AppBar = props => (
         {...props}
     />
 );
+        
 class UserPage extends React.Component {
 
     state = {
@@ -34,14 +35,21 @@ class UserPage extends React.Component {
         let { match } = this.props;
         let { openNotification } = this.state;
 
+        let {
+            match: { url, path, params },
+        } = this.props;
+
         return (
             <Box fill>
                 <AppBar>
-                    <Link to='/' style={{
-                        textDecoration: 'none',
-                        color: 'white',
-                    }}>
-                        <Heading level='3' margin='none'>
+                    <Link
+                        to="/"
+                        style={{
+                            textDecoration: 'none',
+                            color: 'white',
+                        }}
+                    >
+                        <Heading level="3" margin="none">
                             Dagsfylla.no
                         </Heading>
                     </Link>
@@ -61,7 +69,9 @@ class UserPage extends React.Component {
                     <Route 
                         exact path={match.url} 
                         component={() => <ListView openNotification={openNotification} />} />
-                    <Route path={`${match.url}/:id`} component={DetailView} />
+                    <Route path={`${path}/:id`} render={
+                        props => <DetailView {...props} />
+                    } />
                 </Switch>
             </Box>
         );
