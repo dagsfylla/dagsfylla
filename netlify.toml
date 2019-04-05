@@ -4,3 +4,9 @@
   command = "npm run build"
   # This is the directory is publishing to netlify's CDN
   publish = "build"
+# The following redirect is intended for use with most SPAs that handle
+# routing internally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
