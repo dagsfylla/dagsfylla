@@ -1,42 +1,44 @@
 import React from 'react';
 
 import {
-    Box,
-    Anchor,
-    Button,
-    Text,
-    Paragraph
+    Box, Heading, Text
 } from 'grommet';
 
 
 class DetailView extends React.Component {
 
     state = {
-
+        detail: 
+        {
+            "name": "Guttakrutt",
+            "address": "Klostergata 37B",
+            "maxPeople": 150,
+            "type": "DAGSFYLLA",
+            "public": true,
+        }
     }
 
     render() {
-        {console.log(this.props.match)}
-        let { match } = this.props;
+        let { detail } = this.state
         return (
             <Box>
                 <Box
                     pad="large"
                     align="center"
-                    background={{ color: "light-2", opacity: "strong" }}
                     round
                     gap="small"
                 >
-                    <Text>Party</Text>
-                    <Anchor href="" label="Link" />
-                    <Button label="Button" onClick={() => {}} />
+                    <Heading>{detail.name}</Heading>
+                    <Text size={"large"}>{detail.address}</Text>
                 </Box>
-                <Box pad="large" align="center" background="dark-3" round gap="small">
-                    <Text>Travel</Text>
-                    <Anchor href="" label="Link" />
-                    <Button label="Button" onClick={() => {}} />
+                <Box 
+                    pad="large" 
+                    align="center" 
+                    round 
+                    gap="small"
+                >
+                    
                 </Box>
-                <Paragraph>HEIHEIHEI</Paragraph>
             </Box>
         );
     }

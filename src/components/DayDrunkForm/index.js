@@ -10,6 +10,7 @@ import {
     CheckBox,
     Calendar,
     Text,
+    TextArea,
 } from "grommet";
 
 import { FormPreviousLink, FormNextLink } from "grommet-icons";
@@ -33,16 +34,21 @@ const RadioButtonGroup = ({ name, onChange, options, value }) => (
 
 class DayDrunkForm extends React.Component {
 
-    state = {};
+    state = {
+        checked: false,
+    };
 
     onSelect = nextDate => {
         const { date } = this.state;
         this.setState({ date: nextDate !== date ? nextDate : undefined });
     };
 
-    render() {
-        const { date } = this.state;
+    onChange = event => this.setState({ checked: event.target.checked });
 
+
+    render() {
+        const { date, checked } = this.state;
+        console.log(date);
         return(
             <Box fill align="center" justify="center">
                 <Box width="medium">
@@ -63,24 +69,28 @@ class DayDrunkForm extends React.Component {
                             validate={{ regexp: /^[a-z]/i }}
                         />
                         <FormField
-                            label="Max deltagere"
+                            label="Antall deltagere"
                             name="deltagere"
                             required
-                            validate={{ regexp: /^[0-9]{4,6}$/, message: "4-6 digits" }}
+                            validate={{ regexp: /^[0-9]{1,6}$/, message: "1-5 digits" }}
                         />
                         <FormField
                             label="Fylla når?"
-                            name="ampm"
+                            name="døgntid"
                             component={RadioButtonGroup}
                             pad
                             options={["DAGSFYLLA", "kveldsfylla"]}
                         />
-                        <FormField label="Label" htmlFor="check-box">
-                            <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
-                                <CheckBox id="check-box" label="Public?" />
-                            </Box>
-                        </FormField>
-                        <FormField label="Date">
+                        <FormField
+                            name="privat"
+                            component={CheckBox}
+                            pad
+                            label="Privat arrangement?"
+                        />
+                        <FormField 
+                            label="Dato" 
+                            name="dato"
+                        >
                             <Calendar
                                 date={date}
                                 onSelect={this.onSelect}
@@ -117,10 +127,11 @@ class DayDrunkForm extends React.Component {
                                 )}
                             />
                         </FormField>
+                        <FormField label="Beskrivelse" name="beskrivelse" component={TextArea} />
                         <Box direction="row" justify="between" margin={{ top: "medium" }}>
-                            <Button label="Cancel" />
-                            <Button type="reset" label="Reset" />
-                            <Button type="submit" label="Update" primary />
+                            <Button label="Avbryt" />
+                            <Button type="reset" label="Nullstill" />
+                            <Button type="submit" label="Opprett" primary />
                         </Box>
                     </Form>
                 </Box>

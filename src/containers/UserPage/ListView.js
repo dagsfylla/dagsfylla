@@ -8,12 +8,14 @@ import {
     Button,
     Grid,
     Paragraph,
+    Collapsible,
 } from 'grommet';
-import DayDrunkForm from '../../components/DayDrunkForm';
-
-
 
 class ListView extends React.Component {
+    
+    state = {
+        openNotification: this.props.openNotification
+    }
 
     state = {
         dagsFylla: [
@@ -23,6 +25,7 @@ class ListView extends React.Component {
                 "maxPeople": 150,
                 "type": "DAGSFYLLA",
                 "public": true,
+                "date": "",
             },
             {
                 "name": "DAGSFYLLA",
@@ -41,6 +44,12 @@ class ListView extends React.Component {
         ]
     }
 
+    componentWillMount() {
+        this.setState({
+            openNotification: this.props.openNotification
+        })
+    }
+
     /*
     Function to get a list over all dagsfylla
      */
@@ -50,21 +59,14 @@ class ListView extends React.Component {
 
 
     render() {
+
+        const { openNotification } = this.state;
+
         return (
-            <Grid
-                fill
-                rows={["flex"]}
-                columns={["flex", "medium"]}
-                areas={[
-                    { name: "sidebar", start: [1, 0], end: [1, 0] },
-                    { name: "main", start: [0, 0], end: [0, 0] }
-                ]}
-                gap="small"
-            >
+            <div>
                 <Box
                     align="center"
-                    justify="start"
-                    gridarea="main"
+                    justify="center"
                     pad="large"
                 >
                     <Heading>
@@ -72,9 +74,9 @@ class ListView extends React.Component {
                     </Heading>
                     <Clock type="digital" />
                     <Text>Det er intenst</Text>
-                </Box>
+                </Box> 
+                <Collapsible direction="horizontal" open={openNotification}>
                 <Box
-                    gridarea="sidebar"
                     align="center"
                     justify="start"
                     pad="large"
@@ -94,9 +96,9 @@ class ListView extends React.Component {
                                 pad="small"
                             >
                                 <Button key={index} primary label={`${fylla.name}`} onClick={() => (
-                                this.props.history.push(`${fylla.name}`)
-                                )} 
-                                />  
+                                    this.props.history.push(`${fylla.name}`)
+                                )}
+                                />
                             </Box>
                             <Box
                                 align="center"
@@ -107,7 +109,8 @@ class ListView extends React.Component {
                         </Grid>
                     ))}
                 </Box>
-            </Grid>
+                </Collapsible>
+            </div>
         );
     }
 }
