@@ -3,6 +3,8 @@ import { Box, Button, Heading } from 'grommet';
 import { Bar } from 'grommet-icons';
 import { Link, Route, Switch } from 'react-router-dom';
 
+import * as Service from './service';
+
 import ListView from './ListView';
 import DetailView from './DetailView';
 import getUserIfAbsent from '../../utils/getUserIfAbsent';
@@ -27,20 +29,22 @@ class UserPage extends React.Component {
         let username = props.match.params.username;
 
         // Check if current user is already stored in local storage and get if it is not
-        getUserIfAbsent(username);
+        getUserIfAbsent(username).then(userRef =>
+            Service.getEventsForUser(userRef).then(events => this.setState({ events }))
+        );
     }
 
     state = {
         openNotification: false,
+        events: [],
     };
 
     render() {
-        let { match } = this.props;
-        let { openNotification } = this.state;
-
         let {
+            match,
             match: { path, url },
         } = this.props;
+        let { openNotification, events } = this.state;
 
         return (
             <Box fill>
@@ -75,8 +79,12 @@ class UserPage extends React.Component {
                     />
                 </AppBar>
                 <Switch>
-                    <Route exact path={match.url} component={() => <ListView openNotification={openNotification} />} />
-                    <Route path={`${path}/:id`} render={props => <DetailView {...props} />} />
+                    <Route
+                        exact
+                        path={match.url}
+                        render={props => <ListView {...props} openNotification={openNotification} events={events} />}
+                    />
+                    <Route path={`${path}/:id`} render={props => <DetailView {...props} events={events} />} />
                 </Switch>
             </Box>
         );

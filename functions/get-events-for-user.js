@@ -8,7 +8,7 @@ const client = new faunadb.Client({
 exports.handler = (event, context, callback) => {
     console.log('in function get events for user');
     const data = JSON.parse(event.body);
-    console.log('data.userRef', data.userRef);
+    console.log('data.userRef', data);
     return client
         .query(
             q.Map(q.Paginate(q.Match(q.Index('events_by_owner'), data.userRef)), q.Lambda('ref', q.Get(q.Var('ref'))))

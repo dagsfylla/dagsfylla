@@ -1,16 +1,12 @@
 import Api from '../../lib/api';
+import extractData from '../../utils/extractData';
 
 export function getUserByUsername(username) {
     return Api.fetch('get-user-from-username', { username });
 }
 
 export function getEventsForUser(userRef) {
-    return fetch('/.netlify/functions/get-events-for-user', {
-        method: 'POST',
-        body: JSON.stringify({ userRef }),
-    }).then(response => {
-        return response.json();
-    });
+    return Api.fetch('get-events-for-user', { userRef }).then(resp => resp.data.map(extractData));
 }
 
 export function updateEvent(eventRef, data) {

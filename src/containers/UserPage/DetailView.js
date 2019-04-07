@@ -4,13 +4,7 @@ import { Box, Heading, Text } from 'grommet';
 
 class DetailView extends React.Component {
     state = {
-        detail: {
-            name: 'Guttakrutt',
-            address: 'Klostergata 37B',
-            maxPeople: 150,
-            type: 'DAGSFYLLA',
-            public: true,
-        },
+        events: [],
     };
 
     render() {

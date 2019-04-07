@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { Box, Button, CheckBox, Form, FormField, MaskedInput, RadioButton, TextArea } from 'grommet';
-import {getTime} from 'date-fns';
+import { getTime } from 'date-fns';
 
 import * as Service from '../../containers/UserPage/service';
 
 import getUserIfAbsent from '../../utils/getUserIfAbsent';
 import DatePicker from '../DatePicker';
+import { Redirect } from 'react-router-dom';
+import getRef from '../../utils/getRef';
 
 const RadioButtonGroup = ({ name, onChange, options, value }) => (
     <Box gap="small">
@@ -49,12 +51,12 @@ const TimePicker = ({ name, onChange, options, value }) => (
 class DayDrunkForm extends React.Component {
     state = {
         checked: false,
+        createdEventRef: null,
     };
 
     constructor(props) {
         super(props);
         let username = props.match.params.username;
-
         // Check if current user is already stored in local storage and get if it is not
         getUserIfAbsent(username);
     }
@@ -62,20 +64,21 @@ class DayDrunkForm extends React.Component {
     handleSubmit = ({ value }) => {
         value.user = JSON.parse(localStorage.getItem('user')).ref;
         value.starttime = getTime(new Date(`${value.date}T${value.time}`));
-        delete value.date; delete value.time;
-        console.log(value);
-        Service.createEvent(value);
+        delete value.date;
+        delete value.time;
+        Service.createEvent(value).then(event => this.setState({createdEventRef: getRef(event)}));
     };
 
     render() {
-        const { date } = this.state;
-        console.log(date);
+        if (this.state.createdEventRef) {
+            return <Redirect to={`/${this.props.match.params.username}/${this.state.createdEventRef}`} />
+        }
         return (
             <Box fill align="center" justify="center" pad="large">
                 <Box width="medium">
                     <Form onSubmit={this.handleSubmit}>
-                        <FormField label="Arrangementnavn" name="eventname" required />
-                        <FormField label="Adresse" name="address" required />
+                        <FormField label="Arrangementnavn" name="name" required />
+                        <FormField label="Sted" name="location" />
                         <FormField
                             label="Antall deltagere"
                             name="participantCount"
@@ -87,6 +90,7 @@ class DayDrunkForm extends React.Component {
                             name="type"
                             component={RadioButtonGroup}
                             pad
+                            required
                             options={['Dagsfylla', 'Kveldsfylla', 'Annen']}
                         />
                         <FormField name="privateEvent" component={CheckBox} pad label="Privat arrangement?" />
