@@ -8,6 +8,7 @@ const client = new faunadb.Client({
 exports.handler = (event, context, callback) => {
     console.log('in function get-user-from-username');
     const data = JSON.parse(event.body);
+    console.log('data', data);
     return client
         .query(q.Get(q.Match(q.Index('user_by_username'), data.username)))
         .then(ret => {
