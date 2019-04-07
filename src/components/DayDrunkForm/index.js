@@ -66,12 +66,12 @@ class DayDrunkForm extends React.Component {
         value.starttime = getTime(new Date(`${value.date}T${value.time}`));
         delete value.date;
         delete value.time;
-        Service.createEvent(value).then(event => this.setState({createdEventRef: getRef(event)}));
+        Service.createEvent(value).then(event => this.setState({ createdEventRef: getRef(event) }));
     };
 
     render() {
         if (this.state.createdEventRef) {
-            return <Redirect to={`/${this.props.match.params.username}/${this.state.createdEventRef}`} />
+            return <Redirect to={`/${this.props.match.params.username}/${this.state.createdEventRef}`} />;
         }
         return (
             <Box fill align="center" justify="center" pad="large">

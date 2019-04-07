@@ -11,8 +11,6 @@ class ListView extends React.Component {
             match: { url },
         } = this.props;
 
-        console.log(events);
-
         return (
             <div>
                 <Box align="center" justify="center" pad="large">
