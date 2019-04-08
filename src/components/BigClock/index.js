@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyledClock } from './style';
 import differenceInSeconds from 'date-fns/difference_in_seconds'
 
+import { Spinner } from 'reactstrap';
 
 const second = 1,
       minute = second * 60,
@@ -12,32 +13,44 @@ const second = 1,
 class BigClock extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            
+        this.state = {
+            loading: true,
          }
     }
 
-    getSeconds = () => {
+    componentDidMount() {
         let { date } = this.props;
-        console.log(date)
-        var results = differenceInSeconds(new Date(date[0], date[1], date[2], date[3], date[4]), new Date());
-        console.log(results);
-        return results
+        this.interval = setInterval(() => (
+            this.setState({
+                seconds: differenceInSeconds(new Date(date[0], date[1], date[2], date[3], date[4]), new Date()),
+                loading: false,
+            })
+        ), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     render() { 
-
-        let distance = this.getSeconds();
+        let distance = this.state.seconds
 
         return ( 
-            <StyledClock>
-                <ul>
-                    <li><span id="days">{Math.floor(distance / (day))}</span>dager</li>
-                    <li><span id="hours">{Math.floor(distance % (day) / (hour))}</span>timer</li>
-                    <li><span id="minutes">{Math.floor(distance % (hour) / (minute))}</span>minutter</li>
-                    <li><span id="seconds">{Math.floor(distance % (minute) / (second))}</span>sekunder</li>
-                </ul>
-            </StyledClock>
+            <div>
+                {this.state.loading
+                ?
+                <Spinner color="primary" style={{height: 145, width: 145}}/>
+                :
+                    <StyledClock>
+                        <ul>
+                            <li><span id="days">{Math.floor(distance / (day))}</span>dager</li>
+                            <li><span id="hours">{Math.floor(distance % (day) / (hour))}</span>timer</li>
+                            <li><span id="minutes">{Math.floor(distance % (hour) / (minute))}</span>minutter</li>
+                            <li><span id="seconds">{Math.floor(distance % (minute) / (second))}</span>sekunder</li>
+                        </ul>
+                    </StyledClock>
+                }
+            </div>
          );
     }
 }

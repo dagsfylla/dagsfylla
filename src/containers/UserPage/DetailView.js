@@ -25,18 +25,12 @@ class DetailView extends React.Component {
         participants: ["Martin", "Lars"],
     }
 
-    getSeconds = () => {
-        let date = this.state.detail.date.split('-').concat(this.state.detail.time.split(':'))
-        var results = differenceInSeconds(new Date(date[0], date[1], date[2], date[3], date[4], 0), new Date());
-        return results
-    }
-
     events = []
-
-    
 
     render() {
         let { detail, participants } = this.state
+
+        let date = this.state.detail.date.split('-').concat(this.state.detail.time.split(':'))
 
         /*
         let {
@@ -59,18 +53,22 @@ class DetailView extends React.Component {
                                 <Heading>{detail.name}</Heading>
                             </Col>
                         </Row>
-                        <Row >
-                            <BigClock date={date} />
+                        <Row style={{margin: 25}}>
+                            <Col style={{textAlign: "center"}}>
+                                <BigClock date={date} />
+                            </Col>
                         </Row>
                         <Row>
                             <Col sm="9">
-                                <Card>
+                                <Card style={{height: 338}}>
                                     <CardHeader><h4>Beskrivelse</h4></CardHeader>
-                                    <CardText style={{textAlign: "center"}}><i>{detail.description}</i></CardText>
+                                    <CardBody>
+                                        <CardText style={{textAlign: "center"}}><i>{detail.description}</i></CardText>
+                                    </CardBody>
                                 </Card>
                             </Col>
                             <Col sm="3">
-                                <Card>
+                                <Card style={{height: 338}}>
                                     <CardHeader><h4>Deltagere</h4></CardHeader>
                                     <Row>
                                         <Col>
@@ -93,9 +91,15 @@ class DetailView extends React.Component {
                     </Container>
                 </Col>
                 <Col xs="3">
-                    <Card style={{margin: 20}}>
+                    <Card style={{margin: 20, height: 600}}>
                         <CardHeader><h4>Praktisk info</h4></CardHeader>
-                        <CardText>{detail.address}</CardText>
+                        <CardBody>
+                            <CardText>Adresse: <i>{detail.address}</i></CardText>
+                            <CardText>Type fylla: <i>{detail.type}</i></CardText>
+                            <CardText>Dato: <i>{detail.date}</i></CardText>
+                            <CardText>Tidspunkt: <i>{detail.date}</i></CardText>
+                            <CardText>Antall: <i>{detail.maxPeople}</i></CardText>
+                        </CardBody>
                     </Card>
                 </Col>
             </Row>
