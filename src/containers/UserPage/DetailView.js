@@ -8,22 +8,8 @@ import {
 import { 
     Container, Row, Col, Card, CardText, Input, CardHeader, Button, CardBody
  } from 'reactstrap';
- import differenceInSeconds from 'date-fns/difference_in_seconds'
-
-const second = 1,
-      minute = second * 60,
-      hour = minute * 60,
-      day = hour * 24;
-
-      /*
-let countDown = new Date('Sep 30, 2019 00:00:00').getTime(),
-x = setInterval(function() {
-    let now = new Date().getTime(),
-        distance = countDown - now;
-*/
 
 class DetailView extends React.Component {
-
     state = {
         detail: 
         {
@@ -45,27 +31,23 @@ class DetailView extends React.Component {
         return results
     }
 
+    events = []
+
     
 
     render() {
         let { detail, participants } = this.state
 
-        let distance = this.getSeconds()
-
-        let date = this.state.detail.date.split('-').concat(this.state.detail.time.split(':'))
-
         /*
         let {
-            match: {
-                params
-            },
+            match: { params },
             events,
         } = this.props;
 
-        let event = events.find(({ id }) => id === parseInt(params.id));
+        let event = events.find(({ id }) => id === parseInt(params.id, 10));
 
         if (!event) {
-            return <h3>No event found</h3>
+            return <h3>No event found</h3>;
         }
         */
         return (

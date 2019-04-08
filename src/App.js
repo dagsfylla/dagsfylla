@@ -1,16 +1,11 @@
-import React, {Component} from 'react';
-import {
-    Box, 
-    Grommet, 
-    Heading,
-    Button,
-} from 'grommet';
+import React, { Component } from 'react';
+import { Box, Grommet } from 'grommet';
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import LandingPage from './containers/LandingPage';
-import UserPage from "./containers/UserPage";
-import DayDrunkForm from "./components/DayDrunkForm/index";
+import UserPage from './containers/UserPage';
+import DayDrunkForm from './components/DayDrunkForm/index';
 
 const theme = {
     global: {
@@ -27,28 +22,16 @@ const theme = {
 
 
 class App extends Component {
-    constructor(props){
-        super(props);
-    }
-
     render() {
-
-
         return (
             <Router>
                 <Grommet theme={theme} full>
-                    
-                    <Box fill align="center" height="100vh">
+                    <Box fill align="center" style={{minHeight: '100vh'}}>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage} />
-                            <Route exact path={'/create-event'} component={DayDrunkForm} />
-                            <Route path={'/:username'} component={UserPage} />
+                            <Route exact path={'/:username/create-event'} component={DayDrunkForm} />
+                            <Route strict path={'/:username'} component={UserPage} />
                         </Switch>
-                    </Box>
-                    <Box height="small" background="neutral-2" fill="horizontal">
-                        <Heading level="3" textAlign="center">
-                            All rights reserved
-                        </Heading>
                     </Box>
                 </Grommet>
             </Router>

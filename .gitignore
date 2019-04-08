@@ -10,7 +10,7 @@
 
 # production
 /build
-/functions-build
+/functions-build/*
 
 # misc
 .DS_Store
