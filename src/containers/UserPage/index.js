@@ -1,14 +1,13 @@
 import React from 'react';
-import { 
-    Box,
-    Heading,
-    Paragraph,
-    Button,
-} from 'grommet';
-import {Bar} from "grommet-icons";
-import { Route, Switch, Link } from 'react-router-dom';
+import { Box, Button, Heading } from 'grommet';
+import { Bar } from 'grommet-icons';
+import { Link, Route, Switch } from 'react-router-dom';
+
+import * as Service from './service';
+
 import ListView from './ListView';
 import DetailView from './DetailView';
+import getUserIfAbsent from '../../utils/getUserIfAbsent';
 
 const AppBar = props => (
     <Box
@@ -23,21 +22,29 @@ const AppBar = props => (
         {...props}
     />
 );
-        
+
 class UserPage extends React.Component {
+    constructor(props) {
+        super(props);
+        let username = props.match.params.username;
+
+        // Check if current user is already stored in local storage and get if it is not
+        getUserIfAbsent(username).then(userRef =>
+            Service.getEventsForUser(userRef).then(events => this.setState({ events }))
+        );
+    }
 
     state = {
-        openNotification: false
+        openNotification: false,
+        events: [],
     };
 
-    render() {    
-
-        let { match } = this.props;
-        let { openNotification } = this.state;
-
+    render() {
         let {
-            match: { url, path, params },
+            match,
+            match: { path, url },
         } = this.props;
+        let { openNotification, events } = this.state;
 
         return (
             <Box fill>
@@ -53,25 +60,31 @@ class UserPage extends React.Component {
                             Dagsfylla.no
                         </Heading>
                     </Link>
-                    <Link to='/create-event' style={{
-                        textDecoration: 'none',
-                        color: 'white',
-                    }}>
-                        <Heading level='4' margin='none'>
+                    <Link
+                        to={`${url}/create-event`}
+                        style={{
+                            textDecoration: 'none',
+                            color: 'white',
+                        }}
+                    >
+                        <Heading level="4" margin="none">
                             Opprett arrangement
                         </Heading>
                     </Link>
-                    <Button icon={<Bar />} onClick={() => {
-                        this.setState({ openNotification: !openNotification })
-                    }} />
+                    <Button
+                        icon={<Bar />}
+                        onClick={() => {
+                            this.setState({ openNotification: !openNotification });
+                        }}
+                    />
                 </AppBar>
                 <Switch>
-                    <Route 
-                        exact path={match.url} 
-                        component={() => <ListView openNotification={openNotification} />} />
-                    <Route path={`${path}/:id`} render={
-                        props => <DetailView {...props} />
-                    } />
+                    <Route
+                        exact
+                        path={match.url}
+                        render={props => <ListView {...props} openNotification={openNotification} events={events} />}
+                    />
+                    <Route path={`${path}/:id`} render={props => <DetailView {...props} events={events} />} />
                 </Switch>
             </Box>
         );
