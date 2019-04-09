@@ -23,9 +23,8 @@ class DetailView extends React.Component {
             "description": "Lets get the MVP"
         },
         participants: ["Martin", "Lars"],
+        events: []
     }
-
-    events = []
 
     render() {
         let { detail, participants } = this.state

@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 
 export const StyledClock = styled.div`
-    margin: 0;
-    padding: 0;
     li {
         display: inline-block;
         font-size: 1.5em;
