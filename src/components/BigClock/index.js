@@ -22,7 +22,7 @@ class BigClock extends Component {
         let { date } = this.props;
         this.interval = setInterval(() => (
             this.setState({
-                seconds: differenceInSeconds(new Date(date[0], date[1], date[2], date[3], date[4]), new Date()),
+                seconds: differenceInSeconds(new Date(date[0], date[1]-1, date[2], date[3], date[4]), new Date()),
                 loading: false,
             })
         ), 1000);
