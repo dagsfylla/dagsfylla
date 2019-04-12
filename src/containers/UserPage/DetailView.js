@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BigClock from '../../components/BigClock/index';
+import { CardBodyScroll } from './style';
 
 import {
     Heading
@@ -11,18 +12,18 @@ import {
 
 class DetailView extends React.Component {
     state = {
-        detail: 
+        detail:
         {
-            "name": "Proggenach",
-            "address": "Klostergata 37B",
-            "maxPeople": 2,
+            "name": "Byen med gutta",
+            "address": "Stovnerfaret 42",
+            "maxPeople": 100,
             "type": "Kveldsfylla",
             "public": true,
-            "date": "2019-04-07",
-            "time": "23:00",
-            "description": "Lets get the MVP"
+            "date": "2019-04-13",
+            "time": "19:00",
+            "description": "Gutta! \n\n I morgen er det fylla. Finn frem smirnoff ice, breezer og pils."
         },
-        participants: ["Martin", "Lars"],
+        participants: ["Martin", "Håvard", "André", "Tanigan", "Robin", "Boye", "Patrik", "Tobias"],
         events: []
     }
 
@@ -44,7 +45,7 @@ class DetailView extends React.Component {
         }
         */
         return (
-            <Row style={{marginTop: 20}}>
+            <Row style={{marginTop: 20, marginLeft: 0, marginRight: 0}}>
                 <Container>
                     <Row style={{margin: 25}}>
                         <Col sm="12" md={{ size: 6, offset: 3 }} style={{textAlign: "center"}}>
@@ -57,44 +58,45 @@ class DetailView extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm="6">
+                        <Col lg="6" sm="12">
                             <Card style={{height: 400}}>
                                 <CardHeader><h4>Beskrivelse</h4></CardHeader>
-                                <CardBody>
+                                <CardBodyScroll>
                                     <CardText style={{textAlign: "center"}}><i>{detail.description}</i></CardText>
-                                </CardBody>
+                                </CardBodyScroll>
                             </Card>
                         </Col>
-                        <Col sm="3">
+                        <Col lg="3" sm="6">
                             <Card style={{height: 400}}>
                                 <CardHeader><h4>Deltagere</h4></CardHeader>
                                 <Row>
-                                    <Col>
+                                    <Col style={{paddingRight: 0}}>
                                         <Input type="text" name="participants" placeholder="skriv navn her .." />
                                     </Col>
-                                    <Col sm="auto">
+                                    <Col xs="auto" style={{paddingLeft: 0}}>
                                         <Button>Legg til</Button>
                                     </Col>
                                 </Row>
-                                <CardBody>
+                                <CardBodyScroll>
                                     {participants.map((participant, i) => (
                                         <Row>
                                             <p>{participant}</p>
                                         </Row>
                                     ))}
-                                </CardBody>
+                                </CardBodyScroll>
                             </Card>
                         </Col>
-                        <Col xs="3">
+                        <Col lg="3" sm="6">
                             <Card style={{height: 400}}>
                                 <CardHeader><h4>Praktisk info</h4></CardHeader>
-                                <CardBody>
+                                <CardBodyScroll>
                                     <CardText>Adresse: <i>{detail.address}</i></CardText>
                                     <CardText>Type fylla: <i>{detail.type}</i></CardText>
                                     <CardText>Dato: <i>{detail.date}</i></CardText>
-                                    <CardText>Tidspunkt: <i>{detail.date}</i></CardText>
+                                    <CardText>Tidspunkt: <i>{detail.time}</i></CardText>
                                     <CardText>Antall: <i>{detail.maxPeople}</i></CardText>
-                                </CardBody>
+                                    <CardText>Byensjef: <i>Tanigan</i></CardText>
+                                </CardBodyScroll>
                             </Card>
                         </Col>
                     </Row>
