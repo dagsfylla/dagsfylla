@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Bar, Article, Announce, Achievement } from 'grommet-icons';
 
+import { StyledCard } from './style';
+
 import { 
     Col,
     Row,
@@ -101,7 +103,7 @@ class Blogg extends Component {
                 </Col>
                 <Col lg="6" sm="9">
                     {stories.map((item, i ) => (
-                        <Card key={i} style={{margin: 10}}>
+                        <StyledCard key={i} style={{margin: 10}}>
                             <Container style={{margin: 10}}>
                                 <Row>
                                     <Col sm="3">
@@ -120,7 +122,7 @@ class Blogg extends Component {
                                     </Col>
                                 </Row>
                             </Container>
-                        </Card>
+                        </StyledCard>
                     ))}
                 </Col>
             </Row>
