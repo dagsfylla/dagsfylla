@@ -12,7 +12,7 @@ import {
     CardTitle,
     Label,
     Input,
-    Container
+    Container,
  } from 'reactstrap';
 
 let filters =
@@ -24,9 +24,19 @@ let filters =
             "Sitat"
         ],
         "sorting": [
-            "Populært",
-            "Nyeste",
-            "Eldst"
+            {
+                name: "Nyeste",
+                checked: true
+            },
+            {
+                name: "Eldst",
+                checked: false
+            },
+            {
+                name: "Populært",
+                checked: false
+
+            }
         ]
     };
 
@@ -90,7 +100,8 @@ class Blogg extends Component {
                     "date": "2019-03-12",
                 }
             ],
-            activeFilters: []
+            activeFilters: [],
+            activeSort: ["Nyeste"],
         }
     }
 
@@ -110,11 +121,22 @@ class Blogg extends Component {
         }
     };
 
+    handleSort = (e) => {
+        filters.sorting.forEach((item) => {
+            if (item.name === e.target.name) {
+                item.checked = true;
+                this.setState({
+                    activeSort: item.name,
+                })
+            } else {
+                item.checked = false
+            }
+        })
+    };
+
     render() { 
 
-        let { stories, activeFilters } = this.state;
-
-        console.log(activeFilters);
+        let { stories, activeFilters, activeSort } = this.state;
 
         return (
             <Container>
@@ -140,18 +162,20 @@ class Blogg extends Component {
                                 </ul>
                                 <h6>Sortering</h6>
                                 <ul>
-                                {filters.sorting.map((item, i) => (
-                                    <li key={i}>
-                                        <Label check>
-                                            <Input type="checkbox"
-                                                   id={`checkbox${i+filters.type.length}`}
-                                                   onChange={this.handleFilter}
-                                                   name={item}
-                                            />
-                                            {item}
-                                        </Label>
-                                    </li>
-                                ))}
+                                    {filters.sorting.map((item, i) => (
+                                        <li key={i}>
+                                            <Label check>
+                                                <Input
+                                                    type="radio"
+                                                    id={`radio${i}`}
+                                                    onChange={this.handleSort}
+                                                    name={item.name}
+                                                    checked={item.checked}
+                                                />
+                                                {item.name}
+                                            </Label>
+                                        </li>
+                                    ))}
                                 </ul>
                             </CardBody>
                         </Card>
@@ -160,9 +184,9 @@ class Blogg extends Component {
                         {stories
                             .filter(o => activeFilters.includes(o.type) || !(activeFilters.some(r=> filters.type.includes(r))))
                             .sort((a,b) => {
-                                if (activeFilters.includes("Populært")) {
+                                if (activeSort.includes("Populært")) {
                                     return (b.votes - a.votes)
-                                } else if (activeFilters.includes("Eldst")){
+                                } else if (activeSort.includes("Eldst")){
                                     return (differenceInCalendarDays(
                                         new Date(),
                                         new Date(b.date.split('-'))
@@ -170,7 +194,7 @@ class Blogg extends Component {
                                         new Date(),
                                         new Date(a.date.split('-'))
                                     )
-                                } else if (activeFilters.includes("Nyeste")){
+                                } else if (activeSort.includes("Nyeste")){
                                     return (differenceInCalendarDays(
                                         new Date(),
                                         new Date(a.date.split('-'))
