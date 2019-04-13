@@ -33,7 +33,7 @@ class BigClock extends Component {
     }
 
     render() { 
-        let distance = this.state.seconds
+        let distance = this.state.seconds;
 
         return ( 
             <div>

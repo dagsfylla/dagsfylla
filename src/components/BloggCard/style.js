@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Card } from 'reactstrap';
+import { CardBody } from 'reactstrap';
 
-export const StyledCard = styled(Card)`
+export const StyledCardBody = styled(CardBody)`
     border-radius: 5px;
     border: 1px solid black;
     :hover {
@@ -10,4 +10,4 @@ export const StyledCard = styled(Card)`
         background: #E8E8E8;
         cursor: pointer;
     }
-`
+`;
