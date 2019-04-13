@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './containers/LandingPage';
 import UserPage from './containers/UserPage';
 import DayDrunkForm from './components/DayDrunkForm/index';
+import Blogg from './containers/BloggPage/index';
 
 const theme = {
     global: {
@@ -30,6 +31,7 @@ class App extends Component {
                         <Switch>
                             <Route exact path={'/'} component={LandingPage} />
                             <Route exact path={'/:username/create-event'} component={DayDrunkForm} />
+                            <Route exact path={'/:username/blogg'} component={Blogg} />
                             <Route strict path={'/:username'} component={UserPage} />
                         </Switch>
                     </Box>

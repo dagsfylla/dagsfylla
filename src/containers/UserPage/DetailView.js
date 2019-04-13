@@ -7,7 +7,7 @@ import {
     Heading
 } from 'grommet';
 import { 
-    Container, Row, Col, Card, CardText, Input, CardHeader, Button, CardBody
+    Container, Row, Col, Card, CardText, Input, CardHeader, Button
  } from 'reactstrap';
 
 class DetailView extends React.Component {
