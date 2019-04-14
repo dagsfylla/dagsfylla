@@ -96,7 +96,7 @@ class DayDrunkForm extends React.Component {
                         <FormField name="privateEvent" component={CheckBox} pad label="Privat arrangement?" />
                         <FormField label="Dato" name="date" required component={DatePicker} />
                         <FormField label="Tid" name="time" required component={TimePicker} />
-                        <FormField label="Beskrivelse" name="beskrivelse" component={TextArea} />
+                        <FormField label="Beskrivelse" name="description" component={TextArea} />
                         <Box direction="row" justify="between" margin={{ top: 'medium' }}>
                             <Button label="Avbryt" />
                             <Button type="reset" label="Nullstill" />
