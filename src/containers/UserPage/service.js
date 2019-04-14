@@ -6,6 +6,7 @@ export function getUserByUsername(username) {
 }
 
 export function getEventsForUser(userRef) {
+    console.log(userRef);
     return Api.fetch('get-events-for-user', { userRef }).then(resp => resp.data.map(extractData));
 }
 

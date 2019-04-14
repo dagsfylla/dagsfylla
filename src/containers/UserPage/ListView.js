@@ -23,6 +23,7 @@ class ListView extends React.Component {
                         <Heading level={3}>Kommende dagsfylla</Heading>
                         {events.map((event, index) => (
                             <Grid
+                                key={event.ref}
                                 columns={{
                                     count: 2,
                                     size: 'auto',

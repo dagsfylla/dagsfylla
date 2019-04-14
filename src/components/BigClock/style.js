@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const StyledClock = styled.div`
     li {
@@ -9,13 +8,15 @@ export const StyledClock = styled.div`
         padding: 1em;
         text-transform: uppercase;
     }
-    li span {
+    
+    li span:not(.descriptor) {
         height: 60px;
         display: block;
-        font-size: 6.5rem;
+        font-size: 8.5rem;
         text-align: center;
     }
+    
     span {
-        margin-top: 10px;
+        margin-top: 15px;
     }
-`
+`;
