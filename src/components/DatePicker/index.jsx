@@ -11,7 +11,7 @@ class DatePicker extends React.Component {
                     this.props.onChange({ value: e.split('T')[0] });
                 }}
                 size="small"
-                bounds={['2019-03-03', '2019-12-31']}
+                bounds={[new Date(), '2100-01-01']}
                 header={({ date: currentDate, locale, onPreviousMonth, onNextMonth, previousInBound, nextInBound }) => (
                     <Box direction="row" align="center" justify="between">
                         <Button disabled={!previousInBound} onClick={onPreviousMonth}>
