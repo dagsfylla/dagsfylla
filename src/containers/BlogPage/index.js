@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import ReactPaginate from 'react-paginate';
-
-import { 
+import {
     Col,
     Row,
     Card,
@@ -14,6 +12,7 @@ import {
     CardText,
     Button,
  } from 'reactstrap';
+
 
 import BlogPostForm from '../../components/BlogPostForm/index';
 import BlogCards from './BlogCards';
@@ -115,16 +114,9 @@ class Blog extends Component {
             ],
             activeFilters: [],
             activeSort: ["Nyeste"],
-            offset: 0,
-            activePosts: 0,
         }
     }
 
-    componentDidMount() {
-        this.setState({
-            pageCount: Math.ceil(this.state.posts.length / 10),
-        });
-    }
 
     handleFilter = (e) => {
         let { activeFilters } = this.state;
@@ -132,8 +124,9 @@ class Blog extends Component {
         if (activeFilters.find(o => o === filter)) {
             let arr = [...this.state.activeFilters];
             arr.splice(arr.indexOf(filter), 1);
+
             this.setState({
-                activeFilters:  arr
+                activeFilters:  arr,
             })
         } else {
             this.setState(prevState => (
@@ -148,29 +141,17 @@ class Blog extends Component {
                 item.checked = true;
                 this.setState({
                     activeSort: item.name,
-                })
+                });
             } else {
                 item.checked = false
             }
         })
     };
 
-    createPost = () => {
-
-    };
-
-    handlePageClick = data => {
-        let selected = data.selected;
-        let offset = Math.ceil(selected * 10);
-
-        this.setState({ offset: offset });
-    };
 
     render() { 
 
         let { posts, activeFilters, activeSort } = this.state;
-
-        console.log(this.state.activePosts);
 
         return (
             <Container>
@@ -216,19 +197,6 @@ class Blog extends Component {
                     </Col>
                     <Col lg="6" sm="9">
                         <BlogCards posts={posts} filters={filters} activeFilters={activeFilters} activeSort={activeSort} />
-                        <ReactPaginate
-                            previousLabel={'Forrige'}
-                            nextLabel={'Neste'}
-                            breakLabel={'...'}
-                            breakClassName={'break-me'}
-                            pageCount={this.state.pageCount}
-                            marginPagesDisplayed={5}
-                            pageRangeDisplayed={2}
-                            onPageChange={this.handlePageClick}
-                            containerClassName={'pagination'}
-                            subContainerClassName={'pages pagination'}
-                            activeClassName={'active'}
-                        />
                     </Col>
                     <Col lg="3" sm="9">
                         <Card style={{margin: 10}}>
