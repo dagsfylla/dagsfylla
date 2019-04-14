@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Bar, Article, Announce, Achievement, Up, Down } from 'grommet-icons';
 
-import { StyledCardBody } from '../../components/BloggCard/style';
+import { StyledCardBody } from './/style';
 
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
 
@@ -17,7 +17,7 @@ import {
     Card,
 } from 'reactstrap';
 
-class BloggCard extends Component {
+class BlogCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,11 +41,11 @@ class BloggCard extends Component {
 
         let icons = [<Article />, <Bar />, <Announce />, <Achievement />];
 
-        let { item, filters } = this.props;
+        let { post, filters } = this.props;
 
         let distance = differenceInCalendarDays(
             new Date(),
-            new Date(item.date.split('-'))
+            new Date(post.date.split('-'))
         );
 
         return (
@@ -53,18 +53,18 @@ class BloggCard extends Component {
                 <StyledCardBody onClick={this.toggle}>
                     <Row>
                         <Col sm="3">
-                            {icons[filters.type.indexOf(item.type)]}
+                            {icons[filters.type.indexOf(post.type)]}
                         </Col>
                         <Col sm="9">
-                            <CardTitle><h6>{item.title}</h6></CardTitle>
+                            <CardTitle><h6>{post.title}</h6></CardTitle>
                         </Col>
                     </Row>
                     <Row>
                         <Col sm="4">
-                            <CardText><i>{item.author}</i></CardText>
+                            <CardText><i>{post.author}</i></CardText>
                         </Col>
                         <Col sm="4">
-                            <CardText>{item.text.substring(0,10) + ".."}</CardText>
+                            <CardText>{post.text.substring(0,10) + ".."}</CardText>
                         </Col>
                         <Col>
                             <CardText>Dager siden: {distance}</CardText>
@@ -75,7 +75,7 @@ class BloggCard extends Component {
                     <CardBodyScroll style={{maxHeight: 400}}>
                         <Row>
                             <Col md="10">
-                                {item.text}
+                                {post.text}
                             </Col>
                             <Col md="2">
                                 <Row>
@@ -85,7 +85,7 @@ class BloggCard extends Component {
                                     </Row>
                                 <Row>
                                     <Col style={{marginLeft: 5}}>
-                                        <CardText>{item.votes}</CardText>
+                                        <CardText>{post.votes}</CardText>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -102,4 +102,4 @@ class BloggCard extends Component {
     }
 }
 
-export default BloggCard;
+export default BlogCard;

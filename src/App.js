@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './containers/LandingPage';
 import UserPage from './containers/UserPage';
 import DayDrunkForm from './components/DayDrunkForm/index';
-import Blogg from './containers/BloggPage/index';
+import Blogg from './containers/BlogPage/index';
 
 const theme = {
     global: {

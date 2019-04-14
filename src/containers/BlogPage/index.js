@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import BloggCard from '../../components/BloggCard/index';
-
-import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
+import ReactPaginate from 'react-paginate';
 
 import { 
     Col,
@@ -13,7 +11,13 @@ import {
     Label,
     Input,
     Container,
+    CardText,
+    Button,
  } from 'reactstrap';
+
+import BlogPostForm from '../../components/BlogPostForm/index';
+import BlogCards from './BlogCards';
+import { Route, Switch } from 'react-router-dom';
 
 let filters =
     {
@@ -40,11 +44,11 @@ let filters =
         ]
     };
 
-class Blogg extends Component {
+class Blog extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            stories : [
+            posts : [
                 {
                     "author": "Martin Egeli",
                     "title": "The best quote in the world",
@@ -98,11 +102,28 @@ class Blogg extends Component {
                     "id": 232464732563,
                     "votes": 6,
                     "date": "2019-03-12",
-                }
+                },
+                {
+                    "author": "Pappa",
+                    "title": "Dette er bra gutta",
+                    "text": "",
+                    "type": "Fanmail",
+                    "id": 232464732563,
+                    "votes": 6,
+                    "date": "2019-03-12",
+                },
             ],
             activeFilters: [],
             activeSort: ["Nyeste"],
+            offset: 0,
+            activePosts: 0,
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            pageCount: Math.ceil(this.state.posts.length / 10),
+        });
     }
 
     handleFilter = (e) => {
@@ -134,9 +155,22 @@ class Blogg extends Component {
         })
     };
 
+    createPost = () => {
+
+    };
+
+    handlePageClick = data => {
+        let selected = data.selected;
+        let offset = Math.ceil(selected * 10);
+
+        this.setState({ offset: offset });
+    };
+
     render() { 
 
-        let { stories, activeFilters, activeSort } = this.state;
+        let { posts, activeFilters, activeSort } = this.state;
+
+        console.log(this.state.activePosts);
 
         return (
             <Container>
@@ -181,39 +215,47 @@ class Blogg extends Component {
                         </Card>
                     </Col>
                     <Col lg="6" sm="9">
-                        {stories
-                            .filter(o => activeFilters.includes(o.type) || !(activeFilters.some(r=> filters.type.includes(r))))
-                            .sort((a,b) => {
-                                if (activeSort.includes("Populært")) {
-                                    return (b.votes - a.votes)
-                                } else if (activeSort.includes("Eldst")){
-                                    return (differenceInCalendarDays(
-                                        new Date(),
-                                        new Date(b.date.split('-'))
-                                    )) - differenceInCalendarDays(
-                                        new Date(),
-                                        new Date(a.date.split('-'))
-                                    )
-                                } else if (activeSort.includes("Nyeste")){
-                                    return (differenceInCalendarDays(
-                                        new Date(),
-                                        new Date(a.date.split('-'))
-                                    )) - differenceInCalendarDays(
-                                        new Date(),
-                                        new Date(b.date.split('-'))
-                                    )
-                                }
-                                return a - b;
-                            })
-                            .map((item, i) => (
-                            <BloggCard item={item} filters={filters} key={i} />
-                        ))}
+                        <BlogCards posts={posts} filters={filters} activeFilters={activeFilters} activeSort={activeSort} />
+                        <ReactPaginate
+                            previousLabel={'Forrige'}
+                            nextLabel={'Neste'}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            pageCount={this.state.pageCount}
+                            marginPagesDisplayed={5}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            subContainerClassName={'pages pagination'}
+                            activeClassName={'active'}
+                        />
+                    </Col>
+                    <Col lg="3" sm="9">
+                        <Card style={{margin: 10}}>
+                            <CardTitle style={{margin: 10}}><h4>Lag bloggpost</h4></CardTitle>
+                            <CardBody>
+                                <CardText>Noe viktig å tenke over</CardText>
+                                <ul>
+                                    <li>Ingen grov sjikane</li>
+                                    <li>Vi leser over alle poster før de publiseres</li>
+                                </ul>
+                                <Button
+                                    color="primary"
+                                    onClick={() => this.props.history.push(`${this.props.url}/create-post`)}
+                                >
+                                    Lag post
+                                </Button>
+                            </CardBody>
+                        </Card>
                     </Col>
                 </Row>
-            </Container> 
+                <Switch>
+                    <Route exact path={"/create-post"} component={BlogPostForm} />
+                </Switch>
+            </Container>
 
         );
     }
 }
  
-export default Blogg;
+export default Blog;
