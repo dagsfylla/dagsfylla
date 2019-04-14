@@ -1,24 +1,40 @@
 import React from 'react';
 
 import { Box, Clock, Text, Heading, Button, Grid, Paragraph, Collapsible } from 'grommet';
-import { format } from 'date-fns';
+import BigClock from '../../components/BigClock/index';
+import { format } from "date-fns";
+
 
 class ListView extends React.Component {
     render() {
         let {
             events,
-            openNotification,
             match: { url },
         } = this.props;
+
+        if (!events) {
+            return (
+                <div>
+                    There is no events
+                </div>
+            )
+        }
+
+        let [date, time] = format(new Date(events[0].starttime), 'DD-MM-YYYY HH:mm').split(' ');
+
+        let closestEvent = events.sort((a,b) => a.starttime - b.starttime)[0];
+        console.log(closestEvent);
+
+        console.log(events);
 
         return (
             <div>
                 <Box align="center" justify="center" pad="large">
                     <Heading>Tid til neste dagsfylla</Heading>
-                    <Clock type="digital" />
+                    <BigClock date={closestEvent.starttime} />
                     <Text>Det er intenst</Text>
                 </Box>
-                <Collapsible direction="horizontal" open={openNotification}>
+                {/*<Collapsible direction="horizontal" open={openNotification}>
                     <Box align="center" justify="start" pad="large">
                         <Heading level={3}>Kommende dagsfylla</Heading>
                         {events.map((event, index) => (
@@ -45,7 +61,7 @@ class ListView extends React.Component {
                             </Grid>
                         ))}
                     </Box>
-                </Collapsible>
+                </Collapsible>*/}
             </div>
         );
     }
