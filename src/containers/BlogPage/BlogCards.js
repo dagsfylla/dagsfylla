@@ -34,16 +34,16 @@ class BlogCards extends Component {
 
         return (
             <div>
-                <h2>
-                    <strong className="text-secondary">{totalPosts}</strong> Posts
+                {/*<h2>
+                    <strong>{totalPosts}</strong> Posts
                 </h2>
 
                 { currentPage && (
-                    <span className="current-page d-inline-block h-100 pl-4 text-secondary">
-                  Page <span className="font-weight-bold">{ currentPage }</span> / <span className="font-weight-bold">{ totalPages }</span>
+                    <span>
+                  Page <span>{ currentPage }</span> / <span>{ totalPages }</span>
                 </span>
-                ) }
-            {currentPosts
+                ) }*/}
+            {posts
                 .filter(o => activeFilters.includes(o.type) || !(activeFilters.some(r=> filters.type.includes(r))))
                     .sort((a,b) => {
                         if (activeSort.includes("Populært")) {
@@ -70,7 +70,7 @@ class BlogCards extends Component {
                     .map((post, i) => (
                         <BlogCard post={post} filters={filters} key={i} />
                     ))}
-                <Paginated totalRecords={totalPosts} pageLimit={10} pageNeighbours={1} onPageChanged={this.onPageChanged} />
+                {/*<Paginated totalRecords={totalPosts} pageLimit={10} pageNeighbours={1} onPageChanged={this.onPageChanged} />*/}
             </div>
         )
     }

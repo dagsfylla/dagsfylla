@@ -67,16 +67,7 @@ class Blog extends Component {
                     "date": "2019-04-12",
                 },
                 {
-                    "author": "Christian BV",
-                    "title": "Da jeg bæsja på dt",
-                    "text": "Det var så jævlig lang dokø, og jeg bare kunne ikke holde meg",
-                    "type": "Historie",
-                    "id": 232464732563,
-                    "votes": -2,
-                    "date": "2019-01-27",
-                },
-                {
-                    "author": "Andre Egeli",
+                    "author": "Andre",
                     "title": "Jeg elsker dere!!",
                     "text": "Fyfaen dere er rå",
                     "type": "Fanmail",
@@ -96,16 +87,7 @@ class Blog extends Component {
                 {
                     "author": "Pappa",
                     "title": "Dette er bra gutta",
-                    "text": "",
-                    "type": "Fanmail",
-                    "id": 232464732563,
-                    "votes": 6,
-                    "date": "2019-03-12",
-                },
-                {
-                    "author": "Pappa",
-                    "title": "Dette er bra gutta",
-                    "text": "",
+                    "text": "heiaheia",
                     "type": "Fanmail",
                     "id": 232464732563,
                     "votes": 6,
@@ -204,15 +186,15 @@ class Blog extends Component {
                             <CardBody>
                                 <CardText>Noe viktig å tenke over</CardText>
                                 <ul>
-                                    <li>Ingen grov sjikane</li>
-                                    <li>Vi leser over alle poster før de publiseres</li>
+                                    <li>blabla</li>
+                                    <li>blabla</li>
                                 </ul>
-                                <Button
+                                {/*<Button
                                     color="primary"
                                     onClick={() => this.props.history.push(`${this.props.url}/create-post`)}
                                 >
                                     Lag post
-                                </Button>
+                                </Button>*/}
                             </CardBody>
                         </Card>
                     </Col>
