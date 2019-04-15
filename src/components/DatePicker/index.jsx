@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Calendar, Text } from 'grommet/es6';
 import { FormNextLink, FormPreviousLink } from 'grommet-icons/es6';
+import { format } from 'date-fns';
 
 class DatePicker extends React.Component {
     render() {
@@ -11,7 +12,7 @@ class DatePicker extends React.Component {
                     this.props.onChange({ value: e.split('T')[0] });
                 }}
                 size="small"
-                bounds={[new Date(), '2100-01-01']}
+                bounds={[format(new Date(), 'YYYY-MM-DD'), '2100-01-01']}
                 header={({ date: currentDate, locale, onPreviousMonth, onNextMonth, previousInBound, nextInBound }) => (
                     <Box direction="row" align="center" justify="between">
                         <Button disabled={!previousInBound} onClick={onPreviousMonth}>
