@@ -2,10 +2,8 @@ import React from 'react';
 
 import { Bar } from 'grommet-icons';
 
-import { Box, Text, Heading } from 'grommet';
+import { Heading } from 'grommet';
 import BigClock from '../../components/BigClock/index';
-
-import { format } from 'date-fns';
 
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
 
@@ -26,8 +24,6 @@ class ListView extends React.Component {
                 </div>
             )
         }
-
-        let [date, time] = format(new Date(events[0]), 'DD-MM-YYYY HH:mm').split(' ');
 
         let closestEvent = events.sort((a,b) => a.starttime - b.starttime)[0];
 
