@@ -1,11 +1,11 @@
 import React from 'react';
-import { format } from 'date-fns';
 
 import BigClock from '../../components/BigClock/index';
 import { CardBodyScroll } from './style';
 
 import { Heading } from 'grommet';
 import { Card, CardHeader, CardText, Col, Container, Row } from 'reactstrap';
+import getDateTimeFromEpoch from '../../utils/getDateTimeFromEpoch';
 
 class DetailView extends React.Component {
     render() {
@@ -21,7 +21,7 @@ class DetailView extends React.Component {
             return null;
         }
 
-        let [date, time] = format(new Date(event.starttime), 'DD-MM-YYYY HH:mm').split(' ');
+        let [date, time] = getDateTimeFromEpoch(event.starttime);
 
         return (
             <Row style={{ marginTop: 20, marginLeft: 0, marginRight: 0 }}>
