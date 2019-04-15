@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Button, Heading } from 'grommet';
-import { Bar } from 'grommet-icons';
+import { Box, Heading } from 'grommet';
 import { Link, Route, Switch } from 'react-router-dom';
 
 import * as Service from './service';
