@@ -10,6 +10,22 @@ Dagsfylla.no is the new service for planning social events like daydrunks and ev
 ### Warning
 This project is currently under heavy development, and we're hoping to have version 1.0 of the solution out as soon as possible. The project is completely open source, and all help, feeback and critizism is very much welcome. Please file an issue if there's something you would like to see, doesn't work, or otherwise.
 
+### Installation
+#### Clone the repo:
+Either download and unzip the repo, or clone with SSH or HTTPS:
+- HTTPS: `https://github.com/dagsfylla/dagsfylla.git`
+- SSH:   `git@github.com:dagsfylla/dagsfylla.git`
+
+#### Install the dependencies
+`cd` into the root of the project folder. Once there, run: \
+`npm install`
+
+#### Start the development server
+Once dependencies are installed, run: \
+`npm start` \
+ and you should be good to go!
+
+
 ### Technology platform
 
 #### Frontend
