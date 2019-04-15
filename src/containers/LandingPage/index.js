@@ -9,8 +9,7 @@ class LandingPage extends React.Component {
     };
     render() {
         let {redirectUsername} = this.state;
-        console.log(redirectUsername);
-        if (redirectUsername.length > 0) {
+        if (redirectUsername && redirectUsername.length > 0) {
             return <Redirect to={`/${redirectUsername}`} />
         }
         return (
