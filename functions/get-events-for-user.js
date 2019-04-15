@@ -12,7 +12,10 @@ exports.handler = (event, context, callback) => {
     return client
         .query(
             q.Map(
-                q.Paginate(q.Match(q.Index('events_by_owner'), data.userRef)),
+                q.Filter(
+                    q.Paginate(q.Match(q.Index('events_by_owner'), data.userRef)),
+                    q.Lambda(['starttime', 'ref'], q.GT(q.Var('starttime'), new Date().getTime()))
+                ),
                 q.Lambda(['starttime', 'ref'], q.Get(q.Ref(q.Class('user_events'), q.Var('ref'))))
             )
         )
