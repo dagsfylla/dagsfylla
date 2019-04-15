@@ -135,6 +135,10 @@ class Blog extends Component {
 
         let { posts, activeFilters, activeSort } = this.state;
 
+        let activePosts = posts.filter(o => activeFilters.includes(o.type) || !(activeFilters.some(r => filters.type.includes(r))));
+
+        console.log(activePosts);
+
         return (
             <Container>
                 <Row>
@@ -178,7 +182,7 @@ class Blog extends Component {
                         </Card>
                     </Col>
                     <Col lg="6" sm="9">
-                        <BlogCards posts={posts} filters={filters} activeFilters={activeFilters} activeSort={activeSort} />
+                        <BlogCards posts={activePosts} filters={filters} activeFilters={activeFilters} activeSort={activeSort} />
                     </Col>
                     <Col lg="3" sm="9">
                         <Card style={{margin: 10}}>
