@@ -1,8 +1,18 @@
 import { Box, Clock, Heading, Text } from 'grommet/es6';
 import React from 'react';
+import { Button, Form, FormField } from 'grommet';
+import { Redirect } from 'react-router-dom';
 
 class LandingPage extends React.Component {
+    state = {
+        redirectUsername: "",
+    };
     render() {
+        let {redirectUsername} = this.state;
+        console.log(redirectUsername);
+        if (redirectUsername.length > 0) {
+            return <Redirect to={`/${redirectUsername}`} />
+        }
         return (
             <Box fill align="center" height="100vh">
                 <Box
@@ -19,21 +29,20 @@ class LandingPage extends React.Component {
                     <Heading
                         style={{
                             fontFamily: 'open sans',
+                            marginBottom: '-0.25em',
                         }}
                         textAlign="center"
                         size="xlarge"
                         color="#0645ad"
                         margin={{
-                            vertical: 0,
-                            horizontal: 0,
-                            bottom: '-0.2em',
+                            vertical: 'xsmall',
+                            horizontal: 'xsmall',
                         }}
                     >
                         CHALLENGE
                     </Heading>
                     <Heading
                         size="xlarge"
-                        margin="0"
                         textAlign="center"
                         style={{
                             fontFamily: 'open sans',
@@ -64,6 +73,31 @@ class LandingPage extends React.Component {
                     }}
                 >
                     <Text>Velkommen til dagsfylla.no.</Text>
+                </Box>
+                <Box
+                    margin="1em"
+                    animation={{
+                        type: 'fadeIn',
+                        delay: 1000,
+                        duration: 1000,
+                        size: 'large',
+                    }}
+                >
+                    <Text>For å komme igang, skriv inn ditt ønskede brukernavn under:</Text>
+                </Box>
+                <Box
+                    margin="1em"
+                    animation={{
+                        type: 'fadeIn',
+                        delay: 1000,
+                        duration: 1000,
+                        size: 'large',
+                    }}
+                >
+                    <Form onSubmit={e => this.setState({ redirectUsername: e.value.username })}>
+                        <FormField name="username" label="Brukernavn" />
+                        <Button type="submit" primary label="Gå" />
+                    </Form>
                 </Box>
             </Box>
         );
