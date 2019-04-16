@@ -93,7 +93,7 @@ class DetailView extends React.Component {
                                         Tidspunkt: <i>{time}</i>
                                     </CardText>
                                     <CardText>
-                                        Antall: <i>{event.maxPeople}</i>
+                                        Antall: <i>{event.participantCount}</i>
                                     </CardText>
                                 </CardBodyScroll>
                             </Card>

@@ -1,52 +1,91 @@
 import React from 'react';
 
-import { Box, Clock, Text, Heading, Button, Grid, Paragraph, Collapsible } from 'grommet';
-import { format } from 'date-fns';
+import { Bar } from 'grommet-icons';
+
+import { Heading } from 'grommet';
+import BigClock from '../../components/BigClock/index';
+
+import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
+
+import { Row, Container, Col, Card, CardTitle, CardText } from 'reactstrap';
+import { StyledCardBody } from './style';
 
 class ListView extends React.Component {
     render() {
         let {
             events,
-            openNotification,
             match: { url },
         } = this.props;
 
+        if (events.length === 0) {
+            return <div>There is no events</div>;
+        }
+
         return (
-            <div>
-                <Box align="center" justify="center" pad="large">
-                    <Heading>Tid til neste dagsfylla</Heading>
-                    <Clock type="digital" />
-                    <Text>Det er intenst</Text>
-                </Box>
-                <Collapsible direction="horizontal" open={openNotification}>
-                    <Box align="center" justify="start" pad="large">
-                        <Heading level={3}>Kommende dagsfylla</Heading>
-                        {events.map((event, index) => (
-                            <Grid
-                                key={event.ref}
-                                columns={{
-                                    count: 2,
-                                    size: 'auto',
-                                }}
-                                gap="small"
+            <Container>
+                <div style={{ marginBottom: 25 }}>
+                    <Row style={{ margin: 10 }}>
+                        <Col sm="12" md={{ size: 6, offset: 3 }} style={{ textAlign: 'center' }}>
+                            <Heading>Tid til neste dagsfylla</Heading>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col style={{ textAlign: 'center' }}>
+                            <BigClock date={events[0].starttime} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm="12" md={{ size: 6, offset: 3 }} style={{ textAlign: 'center' }}>
+                            <i>Det er intenst</i>
+                        </Col>
+                    </Row>
+                </div>
+                <Row>
+                    <Col sm="12" md={{ size: 6, offset: 3 }} style={{ textAlign: 'center' }}>
+                        <h4>En oversikt over fremtidige dagsfylla</h4>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm="12" md={{ size: 6, offset: 3 }}>
+                        {events.map((event, i) => (
+                            <Card
+                                style={{ margin: 10 }}
+                                key={i}
+                                onClick={() => this.props.history.push(`${url}${event.ref}`)}
                             >
-                                <Box align="center" justify="start" pad="small">
-                                    <Button
-                                        key={index}
-                                        primary
-                                        label={`${event.name}`}
-                                        onClick={() => this.props.history.push(`${url}/${event.ref}`)}
-                                    />
-                                </Box>
-                                <Box align="center" justify="start">
-                                    <Paragraph>{format(new Date(event.starttime), 'dddd DD-MM-YYYY HH:mm')}</Paragraph>
-                                    <Paragraph>{event.location}</Paragraph>
-                                </Box>
-                            </Grid>
+                                <StyledCardBody>
+                                    <Row>
+                                        <Col sm="3">
+                                            <Bar />
+                                        </Col>
+                                        <Col sm="9">
+                                            <CardTitle>
+                                                <h6>{event.name}</h6>
+                                            </CardTitle>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="4">
+                                            <CardText>
+                                                Antall: <i>{event.participantCount}</i>
+                                            </CardText>
+                                        </Col>
+                                        <Col sm="4">
+                                            <CardText>{event.description.substring(0, 15) + '..'}</CardText>
+                                        </Col>
+                                        <Col>
+                                            <CardText>
+                                                Dager til:{' '}
+                                                {differenceInCalendarDays(new Date(event.starttime), new Date())}
+                                            </CardText>
+                                        </Col>
+                                    </Row>
+                                </StyledCardBody>
+                            </Card>
                         ))}
-                    </Box>
-                </Collapsible>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

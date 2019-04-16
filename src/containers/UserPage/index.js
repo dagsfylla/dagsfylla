@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Button, Heading } from 'grommet';
-import { Bar } from 'grommet-icons';
+import { Box, Heading } from 'grommet';
 import { Link, Route, Switch } from 'react-router-dom';
 
 import * as Service from './service';
@@ -35,7 +34,6 @@ class UserPage extends React.Component {
     }
 
     state = {
-        openNotification: false,
         events: [],
     };
 
@@ -44,7 +42,7 @@ class UserPage extends React.Component {
             match,
             match: { path, url },
         } = this.props;
-        let { openNotification, events } = this.state;
+        let { events } = this.state;
 
         return (
             <Box fill>
@@ -71,19 +69,9 @@ class UserPage extends React.Component {
                             Opprett arrangement
                         </Heading>
                     </Link>
-                    <Button
-                        icon={<Bar />}
-                        onClick={() => {
-                            this.setState({ openNotification: !openNotification });
-                        }}
-                    />
                 </AppBar>
                 <Switch>
-                    <Route
-                        exact
-                        path={match.url}
-                        render={props => <ListView {...props} openNotification={openNotification} events={events} />}
-                    />
+                    <Route exact path={match.url} render={props => <ListView {...props} events={events} />} />
                     <Route path={`${path}/:id`} render={props => <DetailView {...props} events={events} />} />
                 </Switch>
             </Box>
