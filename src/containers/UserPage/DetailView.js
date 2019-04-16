@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import BigClock from '../../components/BigClock/index';
 import { CardBodyScroll } from './style';
 
-import { Heading, Button } from 'grommet';
+import { Button, Heading } from 'grommet';
 import { Card, CardHeader, CardText, Col, Container, Row } from 'reactstrap';
 import { LinkPrevious } from 'grommet-icons';
 
@@ -13,7 +13,6 @@ class DetailView extends React.Component {
         let {
             match: {
                 params: { id },
-                url,
             },
         } = this.props;
 
@@ -32,7 +31,7 @@ class DetailView extends React.Component {
                             label={'Tilbake til oversikt'}
                             icon={<LinkPrevious />}
                             margin={'small'}
-                            onClick={() => this.props.history.push(`${url.split('/')[0]}/${url.split('/')[1]}`)}
+                            onClick={this.props.history.goBack}
                         />
                     </Container>
                 </Row>

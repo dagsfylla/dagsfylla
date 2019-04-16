@@ -5,12 +5,13 @@ import { Redirect } from 'react-router-dom';
 
 class LandingPage extends React.Component {
     state = {
-        redirectUsername: "",
+        redirectUsername: '',
     };
+
     render() {
-        let {redirectUsername} = this.state;
+        let { redirectUsername } = this.state;
         if (redirectUsername && redirectUsername.length > 0) {
-            return <Redirect to={`/${redirectUsername}`} />
+            return <Redirect to={`/${redirectUsername}`} />;
         }
         return (
             <Box fill align="center" height="100vh">
@@ -93,7 +94,7 @@ class LandingPage extends React.Component {
                         size: 'large',
                     }}
                 >
-                    <Form onSubmit={e => this.setState({ redirectUsername: e.value.username })}>
+                    <Form onSubmit={e => this.props.history.push(e.value.username.replace(/ /g, '-'))}>
                         <FormField name="username" label="Brukernavn" />
                         <Button type="submit" primary label="Gå" />
                     </Form>

@@ -7,7 +7,7 @@ import BigClock from '../../components/BigClock/index';
 
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
 
-import { Row, Container, Col, Card, CardTitle, CardText } from 'reactstrap';
+import { Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
 import { StyledCardBody } from './style';
 
 class ListView extends React.Component {
