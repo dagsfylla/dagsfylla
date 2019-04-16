@@ -13,6 +13,7 @@ class DetailView extends React.Component {
         let {
             match: {
                 params: { id },
+                url,
             },
         } = this.props;
 
@@ -31,7 +32,7 @@ class DetailView extends React.Component {
                             label={'Tilbake til oversikt'}
                             icon={<LinkPrevious />}
                             margin={'small'}
-                            onClick={this.props.history.goBack}
+                            onClick={() => this.props.history.push(`${url.split('/')[0]}/${url.split('/')[1]}`)}
                         />
                     </Container>
                 </Row>
