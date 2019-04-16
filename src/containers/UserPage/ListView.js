@@ -51,7 +51,7 @@ class ListView extends React.Component {
                             <Card
                                 style={{ margin: 10 }}
                                 key={i}
-                                onClick={() => this.props.history.push(`${url}${event.ref}`)}
+                                onClick={() => this.props.history.push(`${url}/${event.ref}`)}
                             >
                                 <StyledCardBody>
                                     <Row>
@@ -71,7 +71,9 @@ class ListView extends React.Component {
                                             </CardText>
                                         </Col>
                                         <Col sm="4">
-                                            <CardText>{event.description.substring(0, 15) + '..'}</CardText>
+                                            <CardText>
+                                                {event.description && event.description.substring(0, 15) + '..'}
+                                            </CardText>
                                         </Col>
                                         <Col>
                                             <CardText>
