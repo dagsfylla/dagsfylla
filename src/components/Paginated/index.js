@@ -23,11 +23,11 @@ class Paginated extends Component {
         super(props);
         const { totalRecords = null, pageLimit = 10, pageNeighbours = 0 } = props;
 
-        this.pageLimit = typeof pageLimit === 'number' ? pageLimit : 10;
-        this.totalRecords = typeof totalRecords === 'number' ? totalRecords : 0;
+        this.pageLimit = pageLimit;
+        this.totalRecords = totalRecords ;
 
         // pageNeighbours can be: 0, 1 or 2
-        this.pageNeighbours = typeof pageNeighbours === 'number' ? Math.max(0, Math.min(pageNeighbours, 1)) : 0;
+        this.pageNeighbours = Math.max(0, Math.min(pageNeighbours, 1));
 
         this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
 
@@ -72,26 +72,11 @@ class Paginated extends Component {
         this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
     };
 
-    /**
-     * Let's say we have 10 pages and we set pageNeighbours to 2
-     * Given that the current page is 6
-     * The pagination control will look like the following:
-     *
-     * (1) < {4 5} [6] {7 8} > (10)
-     *
-     * (x) => terminal pages: first and last page(always visible)
-     * [x] => represents current page
-     * {...x} => represents page neighbours
-     */
     fetchPageNumbers = () => {
         const totalPages = this.totalPages;
         const currentPage = this.state.currentPage;
         const pageNeighbours = this.pageNeighbours;
 
-        /**
-         * totalNumbers: the total page numbers to show on the control
-         * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
-         */
         const totalNumbers = this.pageNeighbours * 2 + 3;
         const totalBlocks = totalNumbers + 2;
 
@@ -101,11 +86,6 @@ class Paginated extends Component {
 
             let pages = range(startPage, endPage);
 
-            /**
-             * hasLeftSpill: has hidden pages to the left
-             * hasRightSpill: has hidden pages to the right
-             * spillOffset: number of hidden pages either to the left or to the right
-             */
             const hasLeftSpill = startPage > 2;
             const hasRightSpill = totalPages - endPage > 1;
             const spillOffset = totalNumbers - (pages.length + 1);
@@ -153,7 +133,8 @@ class Paginated extends Component {
                             if (page === LEFT_PAGE)
                                 return (
                                     <li key={index} className="page-item">
-                                        <a className="page-link" onClick={this.handleMoveLeft}>
+                                        {/*eslint-disable-next-line */}
+                                        <a className="page-link" aria-label="Previous" onClick={this.handleMoveLeft}>
                                             <span aria-hidden="true">&laquo;</span>
                                             <span className="sr-only">Previous</span>
                                         </a>
@@ -163,7 +144,8 @@ class Paginated extends Component {
                             if (page === RIGHT_PAGE)
                                 return (
                                     <li key={index} className="page-item">
-                                        <a className="page-link" onClick={this.handleMoveRight}>
+                                        {/* eslint-disable-next-line*/}
+                                        <a className="page-link" aria-label="Next" onClick={this.handleMoveRight}>
                                             <span aria-hidden="true">&raquo;</span>
                                             <span className="sr-only">Next</span>
                                         </a>
@@ -172,6 +154,7 @@ class Paginated extends Component {
 
                             return (
                                 <li key={index} className={`page-item${currentPage === page ? ' active' : ''}`}>
+                                    {/* eslint-disable-next-line*/}
                                     <a className="page-link" onClick={this.handleClick(page)}>
                                         {page}
                                     </a>

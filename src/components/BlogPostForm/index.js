@@ -3,15 +3,11 @@ import React, { Component } from 'react';
 class BlogPostForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        this.state = {};
     }
 
     render() {
-        return (
-            ""
-        );
+        return <div />;
     }
 }
 

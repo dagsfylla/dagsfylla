@@ -11,20 +11,19 @@ class BlogCards extends Component {
             currentPosts: [],
             currentPage: null,
             totalPages: null,
+            pageLimit: 10,
         };
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { posts } = this.props;
-        let pageLimit = 2;
-
-        const { currentPage } = this.state;
+        const { pageLimit } = this.state;
         const totalPages = Math.ceil(posts.length / pageLimit);
 
-        const offset = (currentPage - 1) * pageLimit;
-        const currentPosts = posts.slice(offset, offset + pageLimit);
-
         if (prevProps.posts !== posts) {
+            const currentPage = 1;
+            const currentPosts = posts.slice(0, pageLimit);
+
             this.setState({
                 currentPage,
                 currentPosts,
@@ -47,7 +46,7 @@ class BlogCards extends Component {
     render() {
         let { posts, filters, activeFilters, activeSort } = this.props;
 
-        let { currentPosts, currentPage, totalPages } = this.state;
+        let { currentPosts, currentPage, totalPages, pageLimit } = this.state;
 
         const totalPosts = posts.length;
 
@@ -85,7 +84,7 @@ class BlogCards extends Component {
                     ))}
                 <Paginated
                     totalRecords={totalPosts}
-                    pageLimit={2}
+                    pageLimit={pageLimit}
                     pageNeighbours={1}
                     onPageChanged={this.onPageChanged}
                 />
