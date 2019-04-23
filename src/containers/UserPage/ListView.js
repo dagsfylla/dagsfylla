@@ -7,7 +7,7 @@ import BigClock from '../../components/BigClock/index';
 
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
 
-import { Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
+import { Card, CardText, CardTitle, Col, Container, Row, CardBody, Alert } from 'reactstrap';
 import { StyledCardBody } from './style';
 
 class ListView extends React.Component {
@@ -18,7 +18,44 @@ class ListView extends React.Component {
         } = this.props;
 
         if (events.length === 0) {
-            return <div>There is no events</div>;
+            return (
+                <Container>
+                    <Row style={{ margin: 20 }}>
+                        <Col style={{ textAlign: 'center' }}>
+                            <Heading>Kjære dagsfylla-menneske</Heading>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm="12" md={{ size: 6, offset: 3 }}>
+                            <Card>
+                                <CardTitle style={{ textAlign: 'center', marginTop: 20 }}>
+                                    <h4>Velkommen til din fyllareise</h4>
+                                </CardTitle>
+                                <hr />
+                                <CardBody>
+                                    <CardText>
+                                        Dagsfylla.no er for deg som vil gjøre det lille ekstra når du skal på fylla.
+                                    </CardText>
+                                    <CardText>
+                                        Vi kan se du ikke har laget noen arrangementer, så derfor passer det seg med en
+                                        liten introduksjon.
+                                    </CardText>
+                                    <Alert color="danger">ALARM ALARM ALLE MANN TIL PUMPENE DET ER TID FOR DAGSFYLLA</Alert>
+                                    <CardText>
+                                        Man lager et arrangement ved å trykke "Opprett arrangement" oppe til høyre på
+                                        siden. Etter at et arrangement er laget så kan du kopiere linken og sende til
+                                        dine venner, gjerne gjennom populære medier som messenger.
+                                    </CardText>
+                                    <CardText>
+                                        Dersom du synes dette er et lættis konsept, eller har andre innspill, send oss
+                                        gjerne en mail på post@dagsfylla.no.
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            );
         }
 
         return (
