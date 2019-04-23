@@ -40,7 +40,7 @@ class ListView extends React.Component {
                                         Vi kan se du ikke har laget noen arrangementer, så derfor passer det seg med en
                                         liten introduksjon.
                                     </CardText>
-                                    <Alert color="danger">ALARM ALARM ALLE MAN TIL PUMPENE DET ER TID FOR DAGSFYLLA</Alert>
+                                    <Alert color="danger">ALARM ALARM ALLE MANN TIL PUMPENE DET ER TID FOR DAGSFYLLA</Alert>
                                     <CardText>
                                         Man lager et arrangement ved å trykke "Opprett arrangement" oppe til høyre på
                                         siden. Etter at et arrangement er laget så kan du kopiere linken og sende til
