@@ -37,18 +37,18 @@ class ListView extends React.Component {
                                         Dagsfylla.no er for deg som vil gjøre det lille ekstra når du skal på fylla.
                                     </CardText>
                                     <CardText>
-                                        Vi kan se du ikke har lagd noen arrangementer, så derfor passer det seg med en
+                                        Vi kan se du ikke har laget noen arrangementer, så derfor passer det seg med en
                                         liten introduksjon.
                                     </CardText>
-                                    <Alert color="danger">ALARM ALARM DET ER TID FOR DAGSFYLLA</Alert>
+                                    <Alert color="danger">ALARM ALARM ALLE MAN TIL PUMPENE DET ER TID FOR DAGSFYLLA</Alert>
                                     <CardText>
-                                        Man skaper et arrangement ved å trykke "Opprett arrangement" oppe til høyre på
-                                        siden. Etter at et arrangement er lagd så kan du kopiere linken og sende til
+                                        Man lager et arrangement ved å trykke "Opprett arrangement" oppe til høyre på
+                                        siden. Etter at et arrangement er laget så kan du kopiere linken og sende til
                                         dine venner, gjerne gjennom populære medier som messenger.
                                     </CardText>
                                     <CardText>
                                         Dersom du synes dette er et lættis konsept, eller har andre innspill, send oss
-                                        gjerne en mail på fylla@dagsfylla.no.
+                                        gjerne en mail på post@dagsfylla.no.
                                     </CardText>
                                 </CardBody>
                             </Card>
