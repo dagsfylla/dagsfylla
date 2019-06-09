@@ -7,7 +7,7 @@ import BigClock from '../../components/BigClock/index';
 
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
 
-import { Card, CardText, CardTitle, Col, Container, Row, CardBody, Alert } from 'reactstrap';
+import { Card, CardText, CardTitle, Col, Container, Row, CardBody, Alert, Spinner } from 'reactstrap';
 import { StyledCardBody } from './style';
 
 class ListView extends React.Component {
@@ -15,7 +15,23 @@ class ListView extends React.Component {
         let {
             events,
             match: { url },
+            loading,
         } = this.props;
+
+        if (loading) {
+            return (
+                <Container>
+                    <Row style={{marginTop: 100}}>
+                        <Col sm="12" md={{ size: 6, offset: 3 }}>
+                            <Alert color="success">
+                                <Spinner type="grow" color="success" />
+                                <CardText>Klar, ferdig, dagsfylla!</CardText>
+                            </Alert>
+                        </Col>
+                    </Row>
+                </Container>
+            )
+        }
 
         if (events.length === 0) {
             return (
