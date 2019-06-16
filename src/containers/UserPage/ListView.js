@@ -10,6 +10,7 @@ import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
 import { Card, CardText, CardTitle, Col, Container, Row, CardBody, Alert, Spinner } from 'reactstrap';
 import { StyledCardBody } from './style';
 
+
 class ListView extends React.Component {
     render() {
         let {
@@ -89,7 +90,7 @@ class ListView extends React.Component {
                     </Row>
                     <Row>
                         <Col sm="12" md={{ size: 6, offset: 3 }} style={{ textAlign: 'center' }}>
-                            <i>Det er intenst</i>
+                            <i>Pils er pils</i>
                         </Col>
                     </Row>
                 </div>

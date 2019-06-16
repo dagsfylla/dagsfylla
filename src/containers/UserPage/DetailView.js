@@ -86,7 +86,7 @@ class DetailView extends React.Component {
                             {/*</CardBodyScroll>*/}
                             {/*</Card>*/}
                             {/*</Col>*/}
-                            <Col lg="6" sm="6">
+                            <Col lg="6" sm="12">
                                 <Card style={{ height: 400 }}>
                                     <CardHeader>
                                         <h4>Praktisk info</h4>
