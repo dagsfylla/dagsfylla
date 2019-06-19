@@ -29,12 +29,18 @@ class UserPage extends React.Component {
 
         // Check if current user is already stored in local storage and get if it is not
         getUserIfAbsent(username).then(userRef =>
-            Service.getEventsForUser(userRef).then(events => this.setState({ events }))
+            Service.getEventsForUser(userRef).then(events => 
+                this.setState({ 
+                    events, 
+                    loading: false 
+                })
+            )
         );
     }
 
     state = {
         events: [],
+        loading: true,
     };
 
     render() {
@@ -42,7 +48,7 @@ class UserPage extends React.Component {
             match,
             match: { path, url },
         } = this.props;
-        let { events } = this.state;
+        let { events, loading } = this.state;
 
         return (
             <Box fill>
@@ -71,7 +77,7 @@ class UserPage extends React.Component {
                     </Link>
                 </AppBar>
                 <Switch>
-                    <Route exact path={match.url} render={props => <ListView {...props} events={events} />} />
+                    <Route exact path={match.url} render={props => <ListView {...props} events={events} loading={loading} />} />
                     <Route path={`${path}/:id`} render={props => <DetailView {...props} events={events} />} />
                 </Switch>
             </Box>
