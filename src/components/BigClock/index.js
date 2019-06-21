@@ -23,7 +23,7 @@ class BigClock extends Component {
         this.interval = setInterval(
             () =>
                 this.setState({
-                    seconds: differenceInSeconds(new Date(date), new Date()),
+                    seconds: Math.abs(differenceInSeconds(new Date(date), new Date())),
                     loading: false,
                 }),
             1000
