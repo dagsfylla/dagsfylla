@@ -5,7 +5,8 @@ import BigClock from '../../components/BigClock/index';
 import { CardBodyScroll } from './style';
 
 import { Button, Heading } from 'grommet';
-import { Card, CardHeader, CardText, Col, Container, Row } from 'reactstrap';
+import { CardHeader, CardText, Container } from 'reactstrap';
+import { Col, Row, Card } from 'antd';
 import { LinkPrevious } from 'grommet-icons';
 
 class DetailView extends React.Component {
@@ -26,7 +27,7 @@ class DetailView extends React.Component {
 
         return (
             <div>
-                <Row style={{width: '100vw'}}>
+                <Row style={{ width: '100vw' }}>
                     <Container>
                         <Button
                             label={'Tilbake til oversikt'}
@@ -39,7 +40,7 @@ class DetailView extends React.Component {
                 <Row style={{ marginTop: 20, marginLeft: 0, marginRight: 0 }}>
                     <Container>
                         <Row style={{ margin: 25 }}>
-                            <Col sm="12" md={{ size: 6, offset: 3 }} style={{ textAlign: 'center' }}>
+                            <Col span={6} style={{ textAlign: 'center' }}>
                                 <Heading>{event.name}</Heading>
                             </Col>
                         </Row>
@@ -49,7 +50,7 @@ class DetailView extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col lg="6" sm="12">
+                            <Col span={6}>
                                 <Card style={{ height: 400 }}>
                                     <CardHeader>
                                         <h4>Beskrivelse</h4>
@@ -86,7 +87,7 @@ class DetailView extends React.Component {
                             {/*</CardBodyScroll>*/}
                             {/*</Card>*/}
                             {/*</Col>*/}
-                            <Col lg="6" sm="6">
+                            <Col span={6}>
                                 <Card style={{ height: 400 }}>
                                     <CardHeader>
                                         <h4>Praktisk info</h4>

@@ -20,13 +20,12 @@ const theme = {
     },
 };
 
-
 class App extends Component {
     render() {
         return (
             <Router>
                 <Grommet theme={theme} full>
-                    <Box fill align="center" style={{minHeight: '100vh'}}>
+                    <Box fill align="center" style={{ minHeight: '100vh' }}>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage} />
                             <Route exact path={'/:username/create-event'} component={DayDrunkForm} />
