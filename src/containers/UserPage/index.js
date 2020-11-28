@@ -26,7 +26,7 @@ class UserPage extends React.Component {
     constructor(props) {
         super(props);
         let username = props.match.params.username;
-
+        /*
         // Check if current user is already stored in local storage and get if it is not
         getUserIfAbsent(username).then(userRef =>
             Service.getEventsForUser(userRef).then(events => 
@@ -35,7 +35,7 @@ class UserPage extends React.Component {
                     loading: false 
                 })
             )
-        );
+        );*/
     }
 
     state = {
