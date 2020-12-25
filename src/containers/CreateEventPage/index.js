@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { Component, useState } from 'react';
 
 import styled from 'styled-components';
 
-//import Form from "../../components/Form/index";
 
-import { Row, Col } from 'reactstrap';
 
+import {
+    Col,
+    Row,
+    Form,
+    DatePicker,
+    TimePicker,
+    Button,
+    Radio,
+    Input,
+    Select
+} from 'antd';
+
+
+
+/*
 
 const Form = styled.form`
     min-width: 100%;
     border: 1px solid grey;
     margin-top: 20px;
     padding: 10px 10px 10px 10px;
-    &:hover {
-        border: 3px solid grey;
-    }
     border-radius: 5px;
     input {
         width: 100%;
@@ -22,10 +32,7 @@ const Form = styled.form`
     }
     input[type=text] {
         border: none;
-        border-bottom: 3px solid blue;
-    }
-    input[type=text]:focus {
-        border: 3px solid #555;
+        border-bottom: 1px solid blue;
     }
     input[type=submit] {
         background-color: #4CAF50;
@@ -37,8 +44,26 @@ const Form = styled.form`
         cursor: pointer;
     }
 `
+*/
 
-class CreateEventPage extends React.Component {
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
+};
+
+const config = {
+    rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+};
+
+
+class CreateEventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,16 +71,16 @@ class CreateEventPage extends React.Component {
         }
     }
 
-
-    handleSubmit = () => {
-        //tbd
-        return;
-    };
-
-
     render() {
+        const onFinish = (fieldsValue) => {
+            const values = {
+                ...fieldsValue,
+                'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss')
+            }
+        }
         return (
             <div>
+                {/*
                 <Form>
                     <Col>
                         <Row>
@@ -89,6 +114,45 @@ class CreateEventPage extends React.Component {
                             </Col>
                         </Row>
                     </Col>
+                </Form>
+                */}
+                <Form
+                    {...formItemLayout}
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 14 }}
+                    layout="horizontal"
+                    onFinish={onFinish}
+                >
+                    <Form.Item label="Arrangementnavn">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Sted">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Antall deltagere">
+                        <Input rules={[{ type: 'number' }]} />
+                    </Form.Item>
+
+                    <Form.Item label="Type fylla" name="dagsfylla">
+                        <Radio.Group>
+                            <Radio.Button value="Dagsfylla">Dagsfylla</Radio.Button>
+                            <Radio.Button value="Kveldsfylla">Kveldsfylla</Radio.Button>
+                            <Radio.Button value="Annen">Annen</Radio.Button>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item label="DatePicker">
+                        <DatePicker />
+                    </Form.Item>
+                    <Form.Item
+                        wrapperCol={{
+                            xs: { span: 24, offset: 0 },
+                            sm: { span: 16, offset: 8 },
+                        }}
+                    >
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
                 </Form>
             </div>
         );

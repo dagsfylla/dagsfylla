@@ -11,25 +11,25 @@ import {
     NavbarText
 } from 'reactstrap';
 
+import {
+    Layout, Menu
+} from 'antd';
+
+const { Header } = Layout;
+
 class NavbarComponent extends React.Component {
 
     render() {
 
         return (
-            <div>
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/components/">Components</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                        </NavItem>
-                    </Nav>
-                    <NavbarText>Simple Text</NavbarText>
-                </Navbar>
-            </div>
+            <Header>
+                <div className="logo" />
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                    <Menu.Item key="1">nav 1</Menu.Item>
+                    <Menu.Item key="2">nav 2</Menu.Item>
+                    <Menu.Item key="3">nav 3</Menu.Item>
+                </Menu>
+            </Header>
         );
 
     }
